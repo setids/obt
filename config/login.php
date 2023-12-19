@@ -4,8 +4,6 @@ include "config.php";
 
 session_start();
 
-echo "<script>alert('Sesi anda sudah berakhir!');</script>";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
@@ -22,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["level"] = $result["level"];
 
     if ($result["level"] == "Admin") {
-      header("Location:../dashboard/admin/");
+      header("Location:../admin/");
     } else {
-      header("Location: ../dashboard/user/");
+      header("Location: ../user/");
     }
   } else {
     echo "<script>alert('Username atau password salah!');</script>";

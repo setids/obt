@@ -3,7 +3,7 @@ session_start();
 
 include "../../config/config.php";
 
-$db = new CRUD();
+$usr = new User();
 
 if (!isset($_SESSION['id'])) {
   echo "<script>alert('Silahkan login dulu!');</script>";
@@ -26,7 +26,7 @@ if (!isset($_SESSION['id'])) {
   <link rel="stylesheet" href="../../assets/css/admin.css">
   <!-- Icon -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>Admin Panel</title>
+  <title>Admin Panel | Manajemen User</title>
 </head>
 
 <body>
@@ -37,54 +37,40 @@ if (!isset($_SESSION['id'])) {
       <!-- Sidebar Content -->
       <div class="h-100">
         <div class="sidebar-logo">
-          <a href="/obt/dashboard/admin">Development</a>
+          <a href="/obt/admin">Development</a>
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-header">
             Menu
           </li>
           <li class="sidebar-item">
-            <a href="/obt/dashboard/admin" class="sidebar-link active">
+            <a href="/obt/admin" class="sidebar-link">
               <i class='bx bxs-dashboard'></i>
               Dashboard
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="stock.php" class="sidebar-link">
+            <a href="../obat/" class="sidebar-link">
               <i class='bx bxs-data'></i>
               Data Obat
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="transaksi.php" class="sidebar-link">
+            <a href="../transaksi/" class="sidebar-link">
               <i class='bx bxs-wallet-alt'></i>
               Transaksi
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="keluar.php" class="sidebar-link">
+            <a href="../obat/keluar.php" class="sidebar-link">
               <i class='bx bxs-cart-download'></i>
               Obat Keluar
             </a>
           </li>
-          <!-- <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse" aria-expanded="false">
-              <i class='bx bxs-report'></i>
-              Laporan
-            </a>
-            <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Stok Obat</a>
-              </li>
-              <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Obat Masuk</a>
-              </li>
-            </ul>
-          </li> -->
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="user.php" class="sidebar-link">
+            <a href="index.php" class="sidebar-link active">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
@@ -140,16 +126,63 @@ if (!isset($_SESSION['id'])) {
           <div class="row mt-2">
             <!-- Breadcrumb -->
             <div class="col self-align-center">
-              <h5 class="fw-bold">Profile</h5>
+              <h5 class="fw-bold">Ubah Data User</h5>
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="">Home</a></li>
-                  <li class="breadcrumb-item"><a href="">Menu</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Stock Obat</li>
+                  <li class="breadcrumb-item"><a href="">Setting</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ubah Data User</li>
                 </ol>
               </nav>
             </div>
-            <!-- Content -->
+            <!-- Content Header -->
+            <div class="row">
+              <div class="col-mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3 mt-2">
+                        <label for="lama">Nama</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="lama" id="lama" class="form-control" autocomplete="off" required value="">
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-3 mt-2">
+                        <label for="baru">Username</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="baru" id="baru" class="form-control" autocomplete="off" required>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-3 mt-2">
+                        <label for="confirm">Pasword</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="confirm" id="confirm" class="form-control" autocomplete="off" required>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-3 mt-2">
+                        <label for="level">Level</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <select name="level" id="level" class="form-select mb-4">
+                          <option selected value="Admin">Admin</option>
+                          <option value="User">User</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr class="mt-4">
+                    <button type="button" class="row btn btn-primary m-lg-1">Simpan</button>
+                    <a href="user.php" class="btn btn-secondary">Batal</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End -->
           </div>
         </div>
       </main>

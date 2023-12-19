@@ -3,7 +3,7 @@ session_start();
 
 include "../../config/config.php";
 
-$db = new CRUD();
+$usr = new User();
 
 if (!isset($_SESSION['id'])) {
   echo "<script>alert('Silahkan login dulu!');</script>";
@@ -37,32 +37,32 @@ if (!isset($_SESSION['id'])) {
       <!-- Sidebar Content -->
       <div class="h-100">
         <div class="sidebar-logo">
-          <a href="/obt/dashboard/admin">Development</a>
+          <a href="/obt/admin">Development</a>
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-header">
             Menu
           </li>
           <li class="sidebar-item">
-            <a href="/obt/dashboard/admin" class="sidebar-link">
+            <a href="/obt/admin" class="sidebar-link">
               <i class='bx bxs-dashboard'></i>
               Dashboard
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="stock.php" class="sidebar-link">
+            <a href="../obat/" class="sidebar-link">
               <i class='bx bxs-data'></i>
               Data Obat
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="transaksi.php" class="sidebar-link active">
+            <a href="" class="sidebar-link active">
               <i class='bx bxs-wallet-alt'></i>
               Transaksi
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="keluar.php" class="sidebar-link">
+            <a href="../obat/keluar.php" class="sidebar-link">
               <i class='bx bxs-cart-download'></i>
               Obat Keluar
             </a>
@@ -70,20 +70,20 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="user.php" class="sidebar-link">
+            <a href="../user/" class="sidebar-link">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="password.php" class="sidebar-link">
+            <a href="../user/password.php" class="sidebar-link">
               <i class='bx bxs-lock-alt'></i>
               Ubah Password
             </a>
           </li>
 
           <li class="sidebar-item">
-            <a href="profile.php" class="sidebar-link">
+            <a href="../user/profile.php" class="sidebar-link">
               <i class='bx bxs-user'></i>
               Profile
             </a>
@@ -126,7 +126,7 @@ if (!isset($_SESSION['id'])) {
           <div class="row mt-2">
             <!-- Breadcrumb -->
             <div class="col self-align-center">
-              <h5 class="fw-bold">Profile</h5>
+              <h5 class="fw-bold">Transaksi</h5>
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="">Home</a></li>

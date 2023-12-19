@@ -3,7 +3,7 @@ session_start();
 
 include "../../config/config.php";
 
-$db = new CRUD();
+$usr = new User();
 
 if (!isset($_SESSION['id'])) {
   echo "<script>alert('Silahkan login dulu!');</script>";
@@ -22,11 +22,10 @@ if (!isset($_SESSION['id'])) {
   <link rel="shortcut icon" href="../../assets/img/favicon.png">
   <!-- Data Tables -->
   <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../assets/modules/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="../../assets/css/admin.css">
   <!-- Icon -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>Admin Panel | Stock</title>
+  <title>Admin Panel | Password</title>
 </head>
 
 <body>
@@ -37,32 +36,32 @@ if (!isset($_SESSION['id'])) {
       <!-- Sidebar Content -->
       <div class="h-100">
         <div class="sidebar-logo">
-          <a href="/obt/dashboard/admin">Development</a>
+          <a href="/obt/admin">Development</a>
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-header">
             Menu
           </li>
           <li class="sidebar-item">
-            <a href="/obt/dashboard/admin" class="sidebar-link">
+            <a href="/obt/admin" class="sidebar-link">
               <i class='bx bxs-dashboard'></i>
               Dashboard
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="stock.php" class="sidebar-link active">
+            <a href="../obat/" class="sidebar-link">
               <i class='bx bxs-data'></i>
               Data Obat
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="transaksi.php" class="sidebar-link">
+            <a href="../transaksi/" class="sidebar-link">
               <i class='bx bxs-wallet-alt'></i>
               Transaksi
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="keluar.php" class="sidebar-link">
+            <a href="../obat/keluar.php" class="sidebar-link">
               <i class='bx bxs-cart-download'></i>
               Obat Keluar
             </a>
@@ -70,13 +69,13 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="user.php" class="sidebar-link">
+            <a href="index.php" class="sidebar-link">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="password.php" class="sidebar-link">
+            <a href="password.php" class="sidebar-link active">
               <i class='bx bxs-lock-alt'></i>
               Ubah Password
             </a>
@@ -125,53 +124,49 @@ if (!isset($_SESSION['id'])) {
         <div class="container-fluid">
           <div class="row mt-2">
             <!-- Breadcrumb -->
-            <div class="col align-self-center">
-              <h5 class="fw-bold">Data Obat</h5>
-              <div class="breadcrumb" style="--bs-breadcrumb-divider: '>';">
-                <li class="breadcrumb-item"><a href="">Home</a></li>
-                <li class="breadcrumb-item"><a href="">Menu</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Stock Obat</li>
-              </div>
+            <div class="col self-align-center">
+              <h5 class="fw-bold">Ubah Password</h5>
+              <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="">Home</a></li>
+                  <li class="breadcrumb-item"><a href="">Setting</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ubah Password</li>
+                </ol>
+              </nav>
             </div>
-            <!-- Content Header -->
-            <div class="col-auto">
-              <button type="button" class="button-18"><i class='bx bxs-plus-circle'> </i>&nbsp;Tambah</button>
-              <!-- <a href="" class="btn button-18"><i class='bx bxs-plus-circle'></i> Tambah</a> -->
-            </div>
-            <!-- Content Table -->
-            <div class="card">
-              <div class="card-body table-responsive">
-                <table class="table table-striped table-hover" id="userList">
-                  <thead>
-                    <tr>
-                      <th class="text-center">No</th>
-                      <th class="text-center">Kode Obat</th>
-                      <th class="text-center">Nama Obat</th>
-                      <th class="text-center">Harga Beli</th>
-                      <th class="text-center">Harga Jual</th>
-                      <th class="text-center">Satuan</th>
-                      <th class="text-center">Stok</th>
-                      <!-- <th class="text-center">Aksi</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($db->viewStock() as $vw) {
-                    ?>
-                      <tr>
-                        <td class="text-center"><?= $no++; ?></td>
-                        <td class="text-center"><?= $vw["kode_obat"]; ?></td>
-                        <td class="text-center"><?= $vw["nama_obat"]; ?></td>
-                        <td class="text-center">Rp . <?= number_format($vw["harga_beli"], 0, ',', '.'); ?></td>
-                        <td class="text-center">Rp . <?= number_format($vw["harga_jual"], 0, ',', '.'); ?></td>
-                        <td class="text-center"><?= $vw["satuan"]; ?></td>
-                        <td class="text-center"><?= $vw["stok"]; ?></td>
-                        <!-- <td class="text-center"><?= $vw["kode_obat"]; ?></td> -->
-                      </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
+            <!-- Content -->
+            <div class="row">
+              <div class="col-mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3 mt-2">
+                        <label for="lama">Password Lama</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="lama" id="lama" class="form-control" autocomplete="off" required value="<?= $_SESSION['password']; ?>" disabled>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-3 mt-2">
+                        <label for="baru">Password Baru</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="baru" id="baru" class="form-control" autocomplete="off" required>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-3 mt-2">
+                        <label for="confirm">Ulangi Password Baru</label>
+                      </div>
+                      <div class="col sm-9 text-secondary">
+                        <input type="text" name="confirm" id="confirm" class="form-control" autocomplete="off" required>
+                      </div>
+                      <hr class="mt-4">
+                    </div>
+                    <button type="button" class="row btn btn-primary m-lg-1">Simpan</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -182,14 +177,10 @@ if (!isset($_SESSION['id'])) {
 
   <div class="script">
     <script src="../../assets/modules/jquery-3.7.0.js"></script>
-    <script src="../../assets/modules/jquery.dataTables.min.js"></script>
     <script src="../../assets/modules/dataTables.bootstrap5.min.js"></script>
     <script src="../../assets/js/popper.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/admin.js"></script>
-    <script>
-      new DataTable("#userList");
-    </script>
   </div>
 </body>
 

@@ -1,10 +1,9 @@
 <?php
-
 session_start();
 
 include "../../config/config.php";
 
-$db = new CRUD();
+$db = new Obat();
 
 if (!isset($_SESSION['id'])) {
   echo "<script>alert('Silahkan login dulu!');</script>";
@@ -20,7 +19,6 @@ if (!isset($_SESSION['id'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard page">
   <link rel="shortcut icon" href="../../assets/img/favicon.png">
   <!-- Data Tables -->
   <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
@@ -28,7 +26,7 @@ if (!isset($_SESSION['id'])) {
   <link rel="stylesheet" href="../../assets/css/admin.css">
   <!-- Icon -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>Admin Panel</title>
+  <title>Admin Panel | Stock</title>
 </head>
 
 <body>
@@ -39,26 +37,26 @@ if (!isset($_SESSION['id'])) {
       <!-- Sidebar Content -->
       <div class="h-100">
         <div class="sidebar-logo">
-          <a href="/obt/dashboard/admin">Development</a>
+          <a href="/obt/admin">Development</a>
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-header">
             Menu
           </li>
           <li class="sidebar-item">
-            <a href="/obt/dashboard/admin" class="sidebar-link active">
+            <a href="/obt/admin" class="sidebar-link">
               <i class='bx bxs-dashboard'></i>
               Dashboard
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="stock.php" class="sidebar-link">
+            <a href="" class="sidebar-link active">
               <i class='bx bxs-data'></i>
               Data Obat
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="transaksi.php" class="sidebar-link">
+            <a href="../transaksi/" class="sidebar-link">
               <i class='bx bxs-wallet-alt'></i>
               Transaksi
             </a>
@@ -72,20 +70,20 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="user.php" class="sidebar-link">
+            <a href="../user/" class="sidebar-link">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="password.php" class="sidebar-link">
+            <a href="../user/password.php" class="sidebar-link">
               <i class='bx bxs-lock-alt'></i>
               Ubah Password
             </a>
           </li>
 
           <li class="sidebar-item">
-            <a href="profile.php" class="sidebar-link">
+            <a href="../user/profile.php" class="sidebar-link">
               <i class='bx bxs-user'></i>
               Profile
             </a>
@@ -125,49 +123,58 @@ if (!isset($_SESSION['id'])) {
       <!-- Main Content -->
       <main class="content px-3 py-2">
         <div class="container-fluid">
-          <div class="mt-2">
+          <div class="row mt-2">
             <!-- Breadcrumb -->
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="main-breadcrumb">
-              <ol class="breadcrumb">
+            <div class="col align-self-center">
+              <h5 class="fw-bold">Data Obat</h5>
+              <div class="breadcrumb" style="--bs-breadcrumb-divider: '>';">
                 <li class="breadcrumb-item"><a href="">Home</a></li>
-              </ol>
-            </nav>
-            <!-- Info -->
-            <div class="alert alert-info">
-              Selamat datang <strong><?= $_SESSION["nama"]; ?></strong>
+                <li class="breadcrumb-item"><a href="">Menu</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Stock Obat</li>
+              </div>
+            </div>
+            <!-- Content Header -->
+            <div class="col-auto">
+              <button type="button" class="button-18"><i class='bx bxs-plus-circle'> </i>&nbsp;Tambah</button>
+              <!-- <a href="" class="btn button-18"><i class='bx bxs-plus-circle'></i> Tambah</a> -->
+            </div>
+            <!-- Content Table -->
+            <div class="card">
+              <div class="card-body table-responsive">
+                <table class="table table-striped table-hover" id="userList">
+                  <thead>
+                    <tr>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Kode Obat</th>
+                      <th class="text-center">Nama Obat</th>
+                      <th class="text-center">Harga Beli</th>
+                      <th class="text-center">Harga Jual</th>
+                      <th class="text-center">Satuan</th>
+                      <th class="text-center">Stok</th>
+                      <!-- <th class="text-center">Aksi</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($db->views() as $vw) {
+                    ?>
+                      <tr>
+                        <td class="text-center"><?= $no++; ?></td>
+                        <td class="text-center"><?= $vw["kode_obat"]; ?></td>
+                        <td class="text-center"><?= $vw["nama_obat"]; ?></td>
+                        <td class="text-center">Rp . <?= number_format($vw["harga_beli"], 0, ',', '.'); ?></td>
+                        <td class="text-center">Rp . <?= number_format($vw["harga_jual"], 0, ',', '.'); ?></td>
+                        <td class="text-center"><?= $vw["satuan"]; ?></td>
+                        <td class="text-center"><?= $vw["stok"]; ?></td>
+                        <!-- <td class="text-center"><?= $vw["kode_obat"]; ?></td> -->
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col col-sm-12 col-md-6 col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">Data Obat</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                  <a href="" class="btn btn-primary">Tambah</a>
-                </div>
-              </div>
-            </div>
-            <div class="col col-sm-12 col-md-6 col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">Data Obat</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                  <a href="" class="btn btn-primary">Tambah</a>
-                </div>
-              </div>
-            </div>
-            <div class="col col-sm-12 col-md-6 col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">Data Obat</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                  <a href="" class="btn btn-primary">Tambah</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </main>
     </div>

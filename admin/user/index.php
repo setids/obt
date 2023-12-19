@@ -3,7 +3,7 @@ session_start();
 
 include "../../config/config.php";
 
-$db = new CRUD();
+$usr = new User();
 
 if (!isset($_SESSION['id'])) {
   echo "<script>alert('Silahkan login dulu!');</script>";
@@ -37,32 +37,32 @@ if (!isset($_SESSION['id'])) {
       <!-- Sidebar Content -->
       <div class="h-100">
         <div class="sidebar-logo">
-          <a href="/obt/dashboard/admin">Development</a>
+          <a href="/obt/admin">Development</a>
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-header">
             Menu
           </li>
           <li class="sidebar-item">
-            <a href="/obt/dashboard/admin" class="sidebar-link">
+            <a href="/obt/admin" class="sidebar-link">
               <i class='bx bxs-dashboard'></i>
               Dashboard
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="stock.php" class="sidebar-link">
+            <a href="../obat/" class="sidebar-link">
               <i class='bx bxs-data'></i>
               Data Obat
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="transaksi.php" class="sidebar-link">
+            <a href="../transaksi/" class="sidebar-link">
               <i class='bx bxs-wallet-alt'></i>
               Transaksi
             </a>
           </li>
           <li class="sidebar-item">
-            <a href="keluar.php" class="sidebar-link">
+            <a href="../obat/keluar.php" class="sidebar-link">
               <i class='bx bxs-cart-download'></i>
               Obat Keluar
             </a>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="user.php" class="sidebar-link active">
+            <a href="" class="sidebar-link active">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
@@ -185,7 +185,7 @@ if (!isset($_SESSION['id'])) {
                 <tbody>
                   <?php
                   $no = 1;
-                  foreach ($db->views() as $vw) { ?>
+                  foreach ($usr->views() as $vw) { ?>
                     <tr>
                       <td class="text-center"><?= $no++; ?></td>
                       <td class="text-center"><?= $vw["nama"]; ?></td>
@@ -193,7 +193,7 @@ if (!isset($_SESSION['id'])) {
                       <td class="text-center"><?= $vw["password"]; ?></td>
                       <td class="text-center"><?= $vw["level"]; ?></td>
                       <td class="text-center">
-                        <a href="../../config/action.php?id=<?= $vw['id']; ?>&action=updUser" class="btn btn-primary btn-sm m-1 text-white"><i class='bx bxs-pencil'></i></a>
+                        <a href="updUsr.php?id=<?= $vw['id']; ?>&action=updUser" class="btn btn-primary btn-sm m-1 text-white"><i class='bx bxs-pencil'></i></a>
                         <a href="../../config/action.php?id=<?= $vw['id']; ?>&action=delUser" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm"><i class='bx bxs-trash-alt'></i></a>
                       </td>
                     </tr>
