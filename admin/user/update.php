@@ -140,44 +140,49 @@ if (!isset($_SESSION['id'])) {
               <div class="col-mb-3">
                 <div class="card">
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3 mt-2">
-                        <label for="lama">Nama</label>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <input type="text" name="lama" id="lama" class="form-control" autocomplete="off" required value="">
-                      </div>
-                    </div>
-                    <div class="row mt-4">
-                      <div class="col-sm-3 mt-2">
-                        <label for="baru">Username</label>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <input type="text" name="baru" id="baru" class="form-control" autocomplete="off" required>
-                      </div>
-                    </div>
-                    <div class="row mt-4">
-                      <div class="col-sm-3 mt-2">
-                        <label for="confirm">Pasword</label>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <input type="text" name="confirm" id="confirm" class="form-control" autocomplete="off" required>
-                      </div>
-                    </div>
-                    <div class="row mt-4">
-                      <div class="col-sm-3 mt-2">
-                        <label for="level">Level</label>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <select name="level" id="level" class="form-select mb-4">
-                          <option selected value="Admin">Admin</option>
-                          <option value="User">User</option>
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="mt-4">
-                    <button type="button" class="row btn btn-primary m-lg-1">Simpan</button>
-                    <a href="user.php" class="btn btn-secondary">Batal</a>
+                    <form action="../../config/action.php?action=updUser" method="post">
+                      <?php foreach ($usr->edit($_GET['id']) as $d) { ?>
+                        <div class="row">
+                          <div class="col-sm-3 mt-2">
+                            <label for="nama">Nama</label>
+                          </div>
+                          <div class="col sm-9 text-secondary">
+                            <input type="hidden" name="id" value="<?= $d['id']; ?>">
+                            <input type="text" name="nama" id="lama" class="form-control" autocomplete="off" required value="<?= $d['nama']; ?>">
+                          </div>
+                        </div>
+                        <div class="row mt-4">
+                          <div class="col-sm-3 mt-2">
+                            <label for="username">Username</label>
+                          </div>
+                          <div class="col sm-9 text-secondary">
+                            <input type="text" name="username" id="username" class="form-control" autocomplete="off" required value="<?= $d['username']; ?>">
+                          </div>
+                        </div>
+                        <div class="row mt-4">
+                          <div class="col-sm-3 mt-2">
+                            <label for="password">Pasword</label>
+                          </div>
+                          <div class="col sm-9 text-secondary">
+                            <input type="text" name="password" id="password" class="form-control" autocomplete="off" required value="<?= $d['password']; ?>">
+                          </div>
+                        </div>
+                        <div class="row mt-4">
+                          <div class="col-sm-3 mt-2">
+                            <label for="level">Level</label>
+                          </div>
+                          <div class="col sm-9 text-secondary">
+                            <select name="level" id="level" class="form-select mb-4">
+                              <option selected value="Admin" value="<?= $d['level']; ?>">Admin</option>
+                              <option value="User">User</option>
+                            </select>
+                          </div>
+                        </div>
+                        <hr class="mt-4">
+                        <button type="submit" class="row btn btn-primary m-lg-1">Simpan</button>
+                        <a href="../user" class="btn btn-secondary">Batal</a>
+                      <?php } ?>
+                    </form>
                   </div>
                 </div>
               </div>

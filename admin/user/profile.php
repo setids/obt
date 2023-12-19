@@ -70,7 +70,7 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="index.php" class="sidebar-link">
+            <a href="../user" class="sidebar-link">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
@@ -137,84 +137,55 @@ if (!isset($_SESSION['id'])) {
             </div>
             <!-- Content -->
             <div class="row">
-              <div class="col mb-3">
+              <div class="col-mb-3">
                 <div class="card">
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Nama</h6>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <?= $_SESSION["nama"]; ?>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Username</h6>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <?= $_SESSION["username"]; ?>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Password</h6>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <?= $_SESSION["password"]; ?>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Level</h6>
-                      </div>
-                      <div class="col sm-9 text-secondary">
-                        <?= $_SESSION["level"]; ?>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col">
-                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfile">Ubah</a>
-                      </div>
-                      <!-- Modal -->
-                      <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Tambah User" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5 fw-bold" id="editProfile">Edit Profile</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <form action="" method="post">
-                                <label for="nama" class="form-label">Nama Lengkap</label>
-                                <input type="text" name="nama" id="nama" class="form-control mb-2" placeholder="<?= $_SESSION['nama']; ?>" autocomplete="off" required>
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" name="username" id="username" class="form-control mb-2" placeholder="<?= $_SESSION['username']; ?>" autocomplete="off" required>
-                                <label for="password" class="form-label">Password</label>
-                                <input type="text" name="password" id="password" class="form-control mb-2" placeholder="<?= $_SESSION['password']; ?>" autocomplete="off" required>
-                                <label for="level" class="form-label">Hak Akses</label>
-                                <select name="level" id="level" class="form-select mb-4">
-                                  <option selected value="1">Admin</option>
-                                  <option value="2">User</option>
-                                </select>
-                              </form>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                              <button type="button" class="btn btn-primary">Simpan</button>
-                            </div>
-                          </div>
+                    <form action="../../config/action.php?action=updUser" method="post">
+                      <div class="row">
+                        <div class="col-sm-3 mt-2">
+                          <label for="nama">Nama</label>
+                        </div>
+                        <div class="col sm-9 text-secondary">
+                          <input type="hidden" name="id" value="<?= $_SESSION['id']; ?>">
+                          <input type="text" name="nama" id="lama" class="form-control" autocomplete="off" required value="<?= $_SESSION['nama']; ?>">
                         </div>
                       </div>
-                    </div>
+                      <div class="row mt-4">
+                        <div class="col-sm-3 mt-2">
+                          <label for="username">Username</label>
+                        </div>
+                        <div class="col sm-9 text-secondary">
+                          <input type="text" name="username" id="username" class="form-control" autocomplete="off" required value="<?= $_SESSION['username']; ?>">
+                        </div>
+                      </div>
+                      <div class="row mt-4">
+                        <div class="col-sm-3 mt-2">
+                          <label for="password">Pasword</label>
+                        </div>
+                        <div class="col sm-9 text-secondary">
+                          <input type="text" name="password" id="password" class="form-control" autocomplete="off" required value="<?= $_SESSION['password']; ?>">
+                        </div>
+                      </div>
+                      <div class="row mt-4">
+                        <div class="col-sm-3 mt-2">
+                          <label for="level">Level</label>
+                        </div>
+                        <div class="col sm-9 text-secondary">
+                          <select name="level" id="level" class="form-select mb-4">
+                            <option selected value="Admin" value="<?= $_SESSION['level']; ?>">Admin</option>
+                            <option value="User">User</option>
+                          </select>
+                        </div>
+                      </div>
+                      <hr class="mt-4">
+                      <button type="submit" class="row btn btn-primary m-lg-1">Simpan</button>
+                      <a href="../user" class="btn btn-secondary">Batal</a>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- End -->
           </div>
         </div>
       </main>

@@ -35,7 +35,7 @@ class User extends Connection
 {
   public function views()
   {
-    $data = mysqli_query($this->conn, "SELECT * FROM user");
+    $data = mysqli_query($this->conn, "SELECT * FROM user ORDER BY id DESC");
     $rows = mysqli_fetch_all($data, MYSQLI_ASSOC);
 
     return $rows;
@@ -43,7 +43,13 @@ class User extends Connection
 
   public function insert($nama, $user, $pass, $level)
   {
-    mysqli_query($this->conn, "INSERT INTO user VALUES('', '$nama', '$user', '$pass', '$level')");
+    $cek = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM user WHERE username = '$_POST[username]' "));
+
+    if ($cek > 0) {
+      echo "<script>alert(Silahkan gunakan username lain!');</script>";
+    } else {
+      mysqli_query($this->conn, "INSERT INTO user VALUES('', '$nama', '$user', '$pass', '$level')");
+    }
   }
 
   public function delete($id)
@@ -62,7 +68,13 @@ class User extends Connection
 
   public function update($id, $nama, $user, $pass, $level)
   {
-    mysqli_query($this->conn, "UPDATE user set nama = '$nama', username = '$user', password = '$pass', level = '$level' WHERE id = '$id'");
+    $cek = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM user WHERE username = '$_POST[username]' "));
+
+    if ($cek > 0) {
+      echo "<script>alert(Silahkan gunakan username lain!');</script>";
+    } else {
+      mysqli_query($this->conn, "UPDATE user set nama = '$nama', username = '$user', password = '$pass', level = '$level' WHERE id = '$id'");
+    }
   }
 }
 

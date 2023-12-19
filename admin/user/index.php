@@ -186,14 +186,14 @@ if (!isset($_SESSION['id'])) {
                   <?php
                   $no = 1;
                   foreach ($usr->views() as $vw) { ?>
-                    <tr>
-                      <td class="text-center"><?= $no++; ?></td>
-                      <td class="text-center"><?= $vw["nama"]; ?></td>
-                      <td class="text-center"><?= $vw["username"]; ?></td>
-                      <td class="text-center"><?= $vw["password"]; ?></td>
-                      <td class="text-center"><?= $vw["level"]; ?></td>
-                      <td class="text-center">
-                        <a href="updUsr.php?id=<?= $vw['id']; ?>&action=updUser" class="btn btn-primary btn-sm m-1 text-white"><i class='bx bxs-pencil'></i></a>
+                    <tr class="align-middle text-center">
+                      <td><?= $no++; ?></td>
+                      <td><?= $vw["nama"]; ?></td>
+                      <td><?= $vw["username"]; ?></td>
+                      <td><?= $vw["password"]; ?></td>
+                      <td><?= $vw["level"]; ?></td>
+                      <td>
+                        <a href="update.php?id=<?= $vw['id']; ?>&action=updUser" class="btn btn-primary btn-sm m-1 text-white"><i class='bx bxs-pencil'></i></a>
                         <a href="../../config/action.php?id=<?= $vw['id']; ?>&action=delUser" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm"><i class='bx bxs-trash-alt'></i></a>
                       </td>
                     </tr>

@@ -69,7 +69,7 @@ if (!isset($_SESSION['id'])) {
 
           <li class="sidebar-header">Setting</li>
           <li class="sidebar-item">
-            <a href="index.php" class="sidebar-link">
+            <a href="../user" class="sidebar-link">
               <i class='bx bxs-user-account'></i>
               Manajemen User
             </a>
