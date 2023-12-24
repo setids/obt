@@ -163,7 +163,7 @@ if (!isset($_SESSION['id'])) {
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                    <input type="submit" class="btn btn-primary" value="Simpan">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
                   </form>
                 </div>
@@ -215,7 +215,11 @@ if (!isset($_SESSION['id'])) {
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/admin.js"></script>
     <script>
-      new DataTable("#userList");
+      new DataTable("#userList", {
+        language: {
+          url: "../../assets/modules/id.json",
+        },
+      });
     </script>
   </div>
 </body>

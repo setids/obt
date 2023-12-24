@@ -10,7 +10,6 @@ if (!isset($_SESSION['id'])) {
   echo "<script>window.location.href = '../../';</script>";
   exit();
 }
-
 ?>
 
 <!DOCTYPE html>

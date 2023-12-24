@@ -54,3 +54,30 @@ class CRUD extends Connection
     mysqli_query($this->conn, "UPDATE test set nama = '$nama', username = '$username', password = '$password', level = '$level' WHERE id = '$id'");
   }
 }
+
+class Obat extends Connection
+{
+  public function views()
+  {
+    $data = mysqli_query($this->conn, "SELECT * FROM test_obat ORDER BY id DESC");
+    $rows = mysqli_fetch_all($data, MYSQLI_ASSOC);
+
+    return $rows;
+  }
+
+  public function insert($nama, $satuan, $hb, $hj, $stok)
+  {
+    $cek = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM test_obat WHERE nama_obat = '$nama' AND satuan = '$satuan' "));
+
+    if ($cek > 0) {
+      echo "<script>alert('Data sudah ada bro!');</script>";
+    } else {
+      mysqli_query($this->conn, "INSERT INTO test_obat VALUES('', '$nama', '$satuan', '$hb', '$hj', '$stok')");
+    }
+  }
+
+  public function delete($id)
+  {
+    mysqli_query($this->conn, "DELETE FROM test_obat WHERE id = '$id'");
+  }
+}

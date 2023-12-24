@@ -43,10 +43,10 @@ class User extends Connection
 
   public function insert($nama, $user, $pass, $level)
   {
-    $cek = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM user WHERE username = '$_POST[username]' "));
+    $cek = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM user WHERE username = '$user' "));
 
     if ($cek > 0) {
-      echo "<script>alert(Silahkan gunakan username lain!');</script>";
+      echo "<script>alert('Username sudah ada!');</script>";
     } else {
       mysqli_query($this->conn, "INSERT INTO user VALUES('', '$nama', '$user', '$pass', '$level')");
     }

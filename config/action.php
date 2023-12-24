@@ -8,6 +8,7 @@ $action = $_GET['action'];
 
 if ($action == "addUser") {
   $usr->insert($_POST['nama'], $_POST['username'], $_POST['password'], $_POST['level']);
+  // echo "<script>alert('Username sudah ada!');</script>";
   echo "<script>window.location.href = '../admin/user/';</script>";
 } elseif ($action == "delUser") {
   $usr->delete($_GET['id']);
